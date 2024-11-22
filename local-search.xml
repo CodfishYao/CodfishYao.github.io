@@ -59,5 +59,30 @@
   
   
   
+  <entry>
+    <title>你好！欢迎来到我的博客</title>
+    <link href="/1970/01/01/firstBlog/"/>
+    <url>/1970/01/01/firstBlog/</url>
+    
+    <content type="html"><![CDATA[<p>这是我的第一篇博客~</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>随笔</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>
