@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Github Pages自定义域名消失的解决方案</title>
+    <link href="/2024/11/24/Github%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B6%88%E5%A4%B1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <url>/2024/11/24/Github%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B6%88%E5%A4%B1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    
+    <content type="html"><![CDATA[<h2 id="问题情况"><a href="#问题情况" class="headerlink" title="问题情况"></a>问题情况</h2><p>更新博客后，重新利用hexo生成静态文件推送至github后，github pages中的自定义域名消失。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在HEXO所在的路径<code>source\</code>中新建名为<strong>CNAME</strong>的文件，在文件中填写拥有的自定义域名（如<em> <a href="yaohaolin.cn">yaohaolin.cn</a> </em>）。  </p><div class="note note-warning">            <p><strong>注意：</strong></p><ol><li>CNAME文件名称必须全部大写；</li><li>CNAME文件中必须只能包含如<em> <a href="yaohaolin.cn">yaohaolin.cn</a> </em>的域名。</li></ol>          </div><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>本文参考自<a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages">官方文档</a>。  </p><p><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages#cname-errors"><img src="github.png" alt="官方原文"></a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>经验分享</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>HEXO</tag>
+      
+      <tag>Gihub</tag>
+      
+      <tag>网络</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>HEXO无法显示图片的解决方案</title>
     <link href="/2024/11/23/HEXO%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <url>/2024/11/23/HEXO%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
@@ -22,9 +51,9 @@
       
       <tag>HEXO</tag>
       
-      <tag>图片</tag>
-      
       <tag>网络</tag>
+      
+      <tag>图片</tag>
       
     </tags>
     

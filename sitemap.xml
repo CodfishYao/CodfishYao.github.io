@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://codfishyao.github.io/2024/11/24/Github%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B6%88%E5%A4%B1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    
+    <lastmod>2024-11-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://codfishyao.github.io/1970/01/01/firstBlog/</loc>
     
     <lastmod>2024-11-23</lastmod>
@@ -56,14 +65,21 @@
 
   
   <url>
-    <loc>http://codfishyao.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>http://codfishyao.github.io/tags/HEXO/</loc>
     <lastmod>2024-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://codfishyao.github.io/tags/HEXO/</loc>
+    <loc>http://codfishyao.github.io/tags/Gihub/</loc>
+    <lastmod>2024-11-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://codfishyao.github.io/tags/%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2024-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -77,7 +93,7 @@
   </url>
   
   <url>
-    <loc>http://codfishyao.github.io/tags/%E7%BD%91%E7%BB%9C/</loc>
+    <loc>http://codfishyao.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2024-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -107,14 +123,14 @@
 
   
   <url>
-    <loc>http://codfishyao.github.io/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>http://codfishyao.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/</loc>
     <lastmod>2024-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://codfishyao.github.io/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/</loc>
+    <loc>http://codfishyao.github.io/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2024-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
