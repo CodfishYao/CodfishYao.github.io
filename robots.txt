@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/
+Allow: /about/
+Disallow: /vendors/
+Allow: /js/
+Allow: /css/
+Disallow: /fonts/
+Disallow: /fancybox/
+Sitemap: https://yaohaolin.cn/sitemap.xml
+Sitemap: https://yaohaolin.cn/baidusitemap.xml
