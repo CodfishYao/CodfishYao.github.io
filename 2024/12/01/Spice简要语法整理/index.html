@@ -1,0 +1,2430 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo1.png">
+  <link rel="icon" href="/img/logo1.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="YaoHaolin">
+  <meta name="keywords" content="Blog, IC">
+  
+    <meta name="description" content="本文分享了经过整理的简要的SPICE语法等内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spice简要语法整理">
+<meta property="og:url" content="https://yaohaolin.cn/2024/12/01/Spice%E7%AE%80%E8%A6%81%E8%AF%AD%E6%B3%95%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="Yaohaolin">
+<meta property="og:description" content="本文分享了经过整理的简要的SPICE语法等内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-01T14:36:17.000Z">
+<meta property="article:modified_time" content="2024-12-01T14:36:21.434Z">
+<meta property="article:author" content="YaoHaolin">
+<meta property="article:tag" content="HSPICE">
+<meta property="article:tag" content="语法">
+<meta property="article:tag" content="基础知识">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Spice简要语法整理 - Yaohaolin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yaohaolin.cn","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":".","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading1.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"BVNpzrJvk7g6Rr8sPmGtNxVc-gzGzoHsz","app_key":"nSLI4bQPoOOiu9XKjQqLDJs3","server_url":"https://bvnpzrjv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yaohaolin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s21.ax1x.com/2024/11/26/pA4uvXq.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Spice简要语法整理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-01 22:36" pubdate>
+          2024年12月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Spice简要语法整理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <div class="note note-info">
+            <p>持续整理中···</p>
+          </div>
+
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>SPICE的全称是Simulation Program with Integrated Circuit Emphasis，最初由Berkeley于20世纪七十年代发明。它是一种利用电路中结点和器件的互联进行仿真的方法。</p>
+<h2 id="2-Hspice的文件格式"><a href="#2-Hspice的文件格式" class="headerlink" title="2 Hspice的文件格式"></a>2 Hspice的文件格式</h2><p>一个常见的HSPICE文件内容包括：标题行、控制语句、电源定义、器件定义（连接）、子电路定义、仿真&#x2F;分析语句、结束语句等。</p>
+<table>
+<thead>
+<tr>
+<th align="center">类别</th>
+<th align="center">内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">标题</td>
+<td align="center">本行填写，如无标题则需空</td>
+</tr>
+<tr>
+<td align="center">控制语句</td>
+<td align="center">库引用、输出选择、参数定义等</td>
+</tr>
+<tr>
+<td align="center">电源定义</td>
+<td align="center">定义电源，如Vcc、Vss等</td>
+</tr>
+<tr>
+<td align="center">器件定义</td>
+<td align="center">定义如晶体管、电容、电阻、子电路等器件<br>并将其通过各个结点连接</td>
+</tr>
+<tr>
+<td align="center">子电路定义</td>
+<td align="center">定义电路中会用到的子电路</td>
+</tr>
+<tr>
+<td align="center">仿真&#x2F;分析语句</td>
+<td align="center">设置要进行的仿真</td>
+</tr>
+<tr>
+<td align="center">结束语句</td>
+<td align="center">.end 必须存在</td>
+</tr>
+</tbody></table>
+<h2 id="3-Spice基本语法"><a href="#3-Spice基本语法" class="headerlink" title="3 Spice基本语法"></a>3 Spice基本语法</h2><h3 id="3-1-常数、比例与单位-不区分大小写"><a href="#3-1-常数、比例与单位-不区分大小写" class="headerlink" title="3.1 常数、比例与单位(不区分大小写)"></a>3.1 常数、比例与单位(不区分大小写)</h3><h4 id="3-1-1-常数"><a href="#3-1-1-常数" class="headerlink" title="3.1.1 常数"></a>3.1.1 常数</h4><table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GND</td>
+<td align="center">地，0电压</td>
+</tr>
+</tbody></table>
+<h4 id="3-1-2-比例"><a href="#3-1-2-比例" class="headerlink" title="3.1.2 比例"></a>3.1.2 比例</h4><table>
+<thead>
+<tr>
+<th align="center">比例</th>
+<th align="center">尺度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">db</td>
+<td align="center">20log10</td>
+</tr>
+<tr>
+<td align="center">t</td>
+<td align="center">1E+12</td>
+</tr>
+<tr>
+<td align="center">g</td>
+<td align="center">1E+9</td>
+</tr>
+<tr>
+<td align="center">meg</td>
+<td align="center">1E+6</td>
+</tr>
+<tr>
+<td align="center">k</td>
+<td align="center">1E+3</td>
+</tr>
+<tr>
+<td align="center">m</td>
+<td align="center">1E-3</td>
+</tr>
+<tr>
+<td align="center">u</td>
+<td align="center">1E-6</td>
+</tr>
+<tr>
+<td align="center">n</td>
+<td align="center">1E-9</td>
+</tr>
+<tr>
+<td align="center">p</td>
+<td align="center">1E-12</td>
+</tr>
+<tr>
+<td align="center">f</td>
+<td align="center">1E-15</td>
+</tr>
+</tbody></table>
+<p>在HSPICE输出文件中，</p>
+<table>
+<thead>
+<tr>
+<th align="center">比例</th>
+<th align="center">尺度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a</td>
+<td align="center">1E-18</td>
+</tr>
+</tbody></table>
+<h4 id="3-1-3-单位"><a href="#3-1-3-单位" class="headerlink" title="3.1.3 单位"></a>3.1.3 单位</h4><table>
+<thead>
+<tr>
+<th align="center">单位</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">V</td>
+<td align="center">伏</td>
+</tr>
+<tr>
+<td align="center">A</td>
+<td align="center">安</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center">法</td>
+</tr>
+<tr>
+<td align="center">H</td>
+<td align="center">亨</td>
+</tr>
+<tr>
+<td align="center">OHM</td>
+<td align="center">欧姆</td>
+</tr>
+<tr>
+<td align="center">HZ</td>
+<td align="center">赫兹</td>
+</tr>
+<tr>
+<td align="center">DEG</td>
+<td align="center">度</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-基本语句"><a href="#3-2-基本语句" class="headerlink" title="3.2 基本语句"></a>3.2 基本语句</h3><h4 id="3-2-1-注释"><a href="#3-2-1-注释" class="headerlink" title="3.2.1 注释"></a>3.2.1 注释</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">* 这是一个注释<br></code></pre></td></tr></table></figure>
+
+<p><em>HSPICE中没有多行注释</em></p>
+<h4 id="3-2-2-续行符"><a href="#3-2-2-续行符" class="headerlink" title="3.2.2 续行符"></a>3.2.2 续行符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">+ 继续上一行的语句<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-2-3电压源"><a href="#3-2-3电压源" class="headerlink" title="3.2.3电压源"></a>3.2.3电压源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Vxxx n+ n- &lt;&lt;DC=&gt; dcval&gt; &lt;tranfun&gt; &lt;AC=acmag, &lt;acphase&gt;&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n+</td>
+<td>正极</td>
+</tr>
+<tr>
+<td>n-</td>
+<td>负极</td>
+</tr>
+<tr>
+<td>DC&#x3D;dcval</td>
+<td>直流电压，默认为0.0</td>
+</tr>
+<tr>
+<td>tranfun</td>
+<td>瞬态源函数（AM、DC、EXP、PE、PL、PU、PULSE、PWL、SFFM、SIN中的一个或多个）</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>交流小信号分析中使用的交源关键字</td>
+</tr>
+<tr>
+<td>acmag</td>
+<td>交流源幅值</td>
+</tr>
+<tr>
+<td>acphase</td>
+<td>交流源相位，默认为0.0</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-4-电流源"><a href="#3-2-4-电流源" class="headerlink" title="3.2.4 电流源"></a>3.2.4 电流源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Ixxx n+ n- &lt;&lt;DC=&gt; dcval&gt; &lt;tranfun&gt; &lt;AC=acmag, &lt;acphase&gt;&gt;<br>+ &lt;M=val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n+</td>
+<td>正极</td>
+</tr>
+<tr>
+<td>n-</td>
+<td>负极</td>
+</tr>
+<tr>
+<td>DC&#x3D;dcval</td>
+<td>直流电压，默认为0.0</td>
+</tr>
+<tr>
+<td>tranfun</td>
+<td>瞬态源函数（AM、DC、EXP、PE、PL、PU、PULSE、PWL、SFFM、SIN中的一个或多个）</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>交流小信号分析中使用的交源关键字</td>
+</tr>
+<tr>
+<td>acmag</td>
+<td>交流源幅值</td>
+</tr>
+<tr>
+<td>acphase</td>
+<td>交流源相位，默认为0.0</td>
+</tr>
+<tr>
+<td>M</td>
+<td>并联个数</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-5-脉冲源"><a href="#3-2-5-脉冲源" class="headerlink" title="3.2.5 脉冲源"></a>3.2.5 脉冲源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Vxxx n+ n- PU&lt;LSE&gt; &lt;(&gt;v1 v2 &lt;td &lt;tr &lt;tf &lt;pw &lt;per&gt;&gt;&gt;&gt;&gt; &lt;)&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Ixxx n+ n- PU&lt;LSE&gt; &lt;(&gt;v1 v2 &lt;td &lt;tr &lt;tf &lt;pw &lt;per&gt;&gt;&gt;&gt;&gt; &lt;)&gt;r<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PULSE</td>
+<td>可缩写为PU</td>
+</tr>
+<tr>
+<td>v1</td>
+<td>低压&#x2F;低电流</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>高压&#x2F;高电流</td>
+</tr>
+<tr>
+<td>td</td>
+<td>延迟</td>
+</tr>
+<tr>
+<td>tr</td>
+<td>上升时间</td>
+</tr>
+<tr>
+<td>tf</td>
+<td>下降时间</td>
+</tr>
+<tr>
+<td>pw</td>
+<td>脉冲宽度</td>
+</tr>
+<tr>
+<td>per</td>
+<td>周期</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-6-正弦源"><a href="#3-2-6-正弦源" class="headerlink" title="3.2.6 正弦源"></a>3.2.6 正弦源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Vxxx n+ n- SIN &lt;(&gt; vo va &lt;freq &lt;td &lt;  &lt;  &gt;&gt;&gt;&gt; &lt;)&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Ixxx n+ n- SIN &lt;(&gt; vo va &lt;freq &lt;td &lt;  &lt;  &gt;&gt;&gt;&gt; &lt;)&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vo</td>
+<td>直流幅度</td>
+</tr>
+<tr>
+<td>va</td>
+<td>交流幅度</td>
+</tr>
+<tr>
+<td>freq</td>
+<td>频率</td>
+</tr>
+<tr>
+<td>td</td>
+<td>延迟，正弦源开始前的延迟时间，默认为0</td>
+</tr>
+<tr>
+<td>ө</td>
+<td>衰减因子，单位1&#x2F;s，默认为0</td>
+</tr>
+<tr>
+<td>φ</td>
+<td>相位延迟，默认为0</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-7-指数源"><a href="#3-2-7-指数源" class="headerlink" title="3.2.7 指数源"></a>3.2.7 指数源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Vxxx n+ n- EXP &lt;(&gt; v1 v2 &lt;td1 &lt;τ1 &lt;td2 &lt;τ2 　&gt;&gt;&gt;&gt; &lt;)&gt; <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Ixxx n+ n- EXP &lt;(&gt; v1 v2 &lt;td1 &lt;τ1 &lt;td2 &lt;τ2　&gt;&gt;&gt;&gt; &lt;)&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EXP</td>
+<td></td>
+</tr>
+<tr>
+<td>v1</td>
+<td>初始值</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>终值</td>
+</tr>
+<tr>
+<td>td1</td>
+<td>上升延迟</td>
+</tr>
+<tr>
+<td>td2</td>
+<td>下降延迟</td>
+</tr>
+<tr>
+<td>τ1</td>
+<td>上升时间</td>
+</tr>
+<tr>
+<td>τ2</td>
+<td>下降时间</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-8-分段线性源"><a href="#3-2-8-分段线性源" class="headerlink" title="3.2.8 分段线性源"></a>3.2.8 分段线性源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Vxxx n+ n- PWL &lt;(&gt; t1 v1 &lt;t2 v2 t3 v3…&gt; &lt;R &lt;=repeat&gt;&gt; <br>+ &lt;TD=delay&gt; &lt;)&gt; <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Ixxx n+ n- PWL &lt;(&gt; t1 v1 &lt;t2 v2 t3 v3…&gt; &lt;R &lt;=repeat&gt;&gt; <br>+ &lt;TD=delay&gt; &lt;)&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PWL</td>
+<td></td>
+</tr>
+<tr>
+<td>(t1 v1),…(ti vi)</td>
+<td>每个时间点对应一个电压，时间点之间线性插值填充</td>
+</tr>
+<tr>
+<td>R&#x3D;repeat</td>
+<td>循环的起始时间点，repeat必须是t1,t2, …中的某一个，不能是最大的那个时间点。若没有这个命令，电压维持最后一个时间点的电压。</td>
+</tr>
+<tr>
+<td>Td&#x3D;delay</td>
+<td>函数开始的延迟</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-9-调频源"><a href="#3-2-9-调频源" class="headerlink" title="3.2.9 调频源"></a>3.2.9 调频源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Vxxx n+ n- SFFM &lt;(&gt; vo va &lt;fc &lt;mdi &lt;fs&gt;&gt;&gt; &lt;)&gt; <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Ixxx n+ n- SFFM &lt;(&gt; vo va &lt;fc &lt;mdi &lt;fs&gt;&gt;&gt; &lt;)&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SFFM</td>
+<td></td>
+</tr>
+<tr>
+<td>vo</td>
+<td>直流幅度</td>
+</tr>
+<tr>
+<td>va</td>
+<td>交流幅度</td>
+</tr>
+<tr>
+<td>fc</td>
+<td>主频率</td>
+</tr>
+<tr>
+<td>mdi</td>
+<td>调制系数，一般取1到10，默认为0</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>调制频率</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-10-调幅源"><a href="#3-2-10-调幅源" class="headerlink" title="3.2.10 调幅源"></a>3.2.10 调幅源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Vxxx n+ n- AM &lt;(&gt; vo va fm fc &lt;td&gt; &lt;)&gt; <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Ixxx n+ n- AM &lt;(&gt; vo va fm fc &lt;td&gt; &lt;)&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vo</td>
+<td>直流幅度</td>
+</tr>
+<tr>
+<td>va</td>
+<td>交流幅度</td>
+</tr>
+<tr>
+<td>fm</td>
+<td>调制频率</td>
+</tr>
+<tr>
+<td>fc</td>
+<td>载波频率</td>
+</tr>
+<tr>
+<td>td</td>
+<td>初始延迟</td>
+</tr>
+</tbody></table>
+<p><em>SPCICE中支持混合源</em></p>
+<h3 id="3-3-有源器件"><a href="#3-3-有源器件" class="headerlink" title="3.3 有源器件"></a>3.3 有源器件</h3><h4 id="3-3-1-二极管"><a href="#3-3-1-二极管" class="headerlink" title="3.3.1 二极管"></a>3.3.1 二极管</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Dxxx  nplus nminus mname<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nplus</td>
+<td>正极（模型中的寄生电阻串联在正极端）</td>
+</tr>
+<tr>
+<td>nminus</td>
+<td>负极</td>
+</tr>
+<tr>
+<td>mname</td>
+<td>被用到的模型名称</td>
+</tr>
+</tbody></table>
+<h4 id="3-3-2-BJT"><a href="#3-3-2-BJT" class="headerlink" title="3.3.2 BJT"></a>3.3.2 BJT</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Qxxx nc nb ne &lt;ns&gt; mname &lt;area&gt; &lt;OFF&gt; &lt;IC = vbeval,vceval&gt;<br>+ &lt;M = val&gt; &lt;DTEMP = val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nc</td>
+<td>集电极</td>
+</tr>
+<tr>
+<td>nb</td>
+<td>基极</td>
+</tr>
+<tr>
+<td>ne</td>
+<td>发射极</td>
+</tr>
+<tr>
+<td>ns</td>
+<td>衬底, 可选择. 可以在BJT模型中用BULK参数设置.</td>
+</tr>
+<tr>
+<td>mname</td>
+<td>被用到的模型名称</td>
+</tr>
+<tr>
+<td>area, AREA &#x3D; area</td>
+<td>影响电流、电阻和电容的发射极面积倍增因子，默认值&#x3D;1.0</td>
+</tr>
+<tr>
+<td>OFF</td>
+<td>设置DC分析的初始条件，默认设置为ON</td>
+</tr>
+<tr>
+<td>IC &#x3D; vbeval, vceval,VBE, VCE</td>
+<td>初始的内部基极-发射极电压（vbeval）和集电极-发射极间电压（vceval），当UIC存在于.TRAN语句使用，并被覆盖.IC语句覆盖</td>
+</tr>
+<tr>
+<td>M</td>
+<td>并联个数，默认为1</td>
+</tr>
+<tr>
+<td>DTEMP</td>
+<td>器件温度与电路温度之差，单位为摄氏度。默认值为0.0</td>
+</tr>
+<tr>
+<td>AREAB</td>
+<td>影响电流、电阻和电容的基极面积倍增因子。默认值&#x3D;AREA</td>
+</tr>
+<tr>
+<td>AREAC</td>
+<td>影响电流、电阻和电容的集电极面积倍增因子。默认值&#x3D;AREA</td>
+</tr>
+</tbody></table>
+<h4 id="3-3-3-MOSFET"><a href="#3-3-3-MOSFET" class="headerlink" title="3.3.3 MOSFET"></a>3.3.3 MOSFET</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Mxxx  nd ng ns &lt;nb&gt; mname &lt;&lt;L = &gt;length&gt; &lt;&lt;W = &gt;width&gt;<br>+ &lt;AD = val&gt; &lt;AS = val&gt; &lt;PD = val&gt; &lt;PS = val&gt; &lt;NRD = val&gt;<br>+ &lt;NRS = val&gt; &lt;RDC = val&gt; &lt;RSC = val&gt; &lt;OFF&gt; &lt;IC = vds,vgs,vbs&gt;<br>+ &lt;M = val&gt; &lt;DTEMP = val&gt; &lt;DELVTO = val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nd</td>
+<td>漏极</td>
+</tr>
+<tr>
+<td>ng</td>
+<td>栅极</td>
+</tr>
+<tr>
+<td>ns</td>
+<td>源极</td>
+</tr>
+<tr>
+<td>nb</td>
+<td>衬底, 可选择. 可以在MOS模型中用BULK参数设置</td>
+</tr>
+<tr>
+<td>mname</td>
+<td>被用到的模型名称</td>
+</tr>
+<tr>
+<td>L</td>
+<td>沟道长度</td>
+</tr>
+<tr>
+<td>W</td>
+<td>沟道宽度</td>
+</tr>
+<tr>
+<td>AD</td>
+<td>漏极扩散区面积</td>
+</tr>
+<tr>
+<td>AS</td>
+<td>源极扩散区面积</td>
+</tr>
+<tr>
+<td>PD</td>
+<td>漏结周长，包括沟道边缘</td>
+</tr>
+<tr>
+<td>PS</td>
+<td>源结周长，包括沟道边缘</td>
+</tr>
+<tr>
+<td>NRD</td>
+<td>用于电阻计算的漏极扩散平方数</td>
+</tr>
+<tr>
+<td>NRS</td>
+<td>用于电阻计算的源极扩散平方数</td>
+</tr>
+<tr>
+<td>RDC</td>
+<td>由于接触电阻导致的额外漏极电阻</td>
+</tr>
+<tr>
+<td>RSC</td>
+<td>由于接触电阻导致的额外源极电阻</td>
+</tr>
+<tr>
+<td>OFF</td>
+<td>设置DC分析的初始条件，默认设置为ON</td>
+</tr>
+<tr>
+<td>IC &#x3D; vds, vgs, vbs</td>
+<td>初始的外部漏源（vds）、栅源（vgs）、衬源（vbs）电压</td>
+</tr>
+<tr>
+<td>M</td>
+<td>并联个数</td>
+</tr>
+<tr>
+<td>DTEMP</td>
+<td>器件温度与电路温度之差，单位为摄氏度。默认值为0.0</td>
+</tr>
+<tr>
+<td>DELVTO</td>
+<td>阈值电压偏移量，默认值0.0</td>
+</tr>
+</tbody></table>
+<h4 id="3-3-4-JFET-MESFET"><a href="#3-3-4-JFET-MESFET" class="headerlink" title="3.3.4 JFET&#x2F;MESFET"></a>3.3.4 JFET&#x2F;MESFET</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Jxxx nd ng ns &lt;nb&gt; mname &lt;&lt;&lt;AREA&gt; = area | &lt;W = val&gt; &lt;L = val&gt;&gt;<br>+ &lt;OFF&gt; &lt;IC = vdsval,vgsval&gt; &lt;M = val&gt; &lt;DTEMP = val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nd</td>
+<td>漏极</td>
+</tr>
+<tr>
+<td>ng</td>
+<td>栅极</td>
+</tr>
+<tr>
+<td>ns</td>
+<td>源极</td>
+</tr>
+<tr>
+<td>nb</td>
+<td>衬底（可选）</td>
+</tr>
+<tr>
+<td>mname</td>
+<td>被用到的模型名称</td>
+</tr>
+<tr>
+<td>area, AREA &#x3D; area</td>
+<td>影响BETA、RD、RS、IS、CGS和CGD参数的面积倍增因子。默认值为1.0，单位为平方米</td>
+</tr>
+<tr>
+<td>W</td>
+<td>栅宽，单位为米</td>
+</tr>
+<tr>
+<td>L</td>
+<td>栅长，单位为米</td>
+</tr>
+<tr>
+<td>OFF</td>
+<td>DC分析时的初始条件，默认为ON</td>
+</tr>
+<tr>
+<td>*C &#x3D; vdsval, vgsval, VDS, VGS</td>
+<td>初始的内部漏源电压（vdsval）和栅源电压（vgsval），当UIC存在于.TRAN语句使用，并被覆盖.IC语句覆盖</td>
+</tr>
+<tr>
+<td>M</td>
+<td>并联个数，默认为1</td>
+</tr>
+<tr>
+<td>DTEMP</td>
+<td>器件温度与电路温度之差，单位为摄氏度。默认值为0.0</td>
+</tr>
+</tbody></table>
+<h3 id="3-4-无源器件"><a href="#3-4-无源器件" class="headerlink" title="3.4 无源器件"></a>3.4 无源器件</h3><h4 id="3-4-1-电阻"><a href="#3-4-1-电阻" class="headerlink" title="3.4.1 电阻"></a>3.4.1 电阻</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Rxxx n1 n2 &lt;mname&gt; &lt;R = &gt;resistance &lt;AC = val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n1</td>
+<td>阳极</td>
+</tr>
+<tr>
+<td>n2</td>
+<td>阴极</td>
+</tr>
+<tr>
+<td>mname</td>
+<td>电阻模型名称</td>
+</tr>
+<tr>
+<td>R &#x3D; resistance</td>
+<td>室温下电阻大小，单位欧姆</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>交流分析中电阻大小</td>
+</tr>
+</tbody></table>
+<h4 id="3-4-2-电容"><a href="#3-4-2-电容" class="headerlink" title="3.4.2 电容"></a>3.4.2 电容</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Cxxx n1 n2 &lt;mname&gt; &lt;C = &gt;capacitance<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n1</td>
+<td>阳极</td>
+</tr>
+<tr>
+<td>n2</td>
+<td>阴极</td>
+</tr>
+<tr>
+<td>mname</td>
+<td>电容模型名称</td>
+</tr>
+<tr>
+<td>C &#x3D; capacitance</td>
+<td>室温下电容大小，单位库伦</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="3-4-3-电感"><a href="#3-4-3-电感" class="headerlink" title="3.4.3 电感"></a>3.4.3 电感</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Lxxx n1 n2 &lt;L = &gt;inductance<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n1</td>
+<td>阳极</td>
+</tr>
+<tr>
+<td>n2</td>
+<td>阴极</td>
+</tr>
+<tr>
+<td>mname</td>
+<td>电感模型名称</td>
+</tr>
+<tr>
+<td>L &#x3D; inductance</td>
+<td>室温下电感大小，单位亨特</td>
+</tr>
+</tbody></table>
+<h4 id="3-4-4-互感"><a href="#3-4-4-互感" class="headerlink" title="3.4.4 互感"></a>3.4.4 互感</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Kxxx Lyyy Lzzz &lt;K = &gt;coupling<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Lyyy</td>
+<td>第一级电感</td>
+</tr>
+<tr>
+<td>Lzzz</td>
+<td>第二级电感</td>
+</tr>
+<tr>
+<td>K &#x3D; coupling</td>
+<td>耦合系数</td>
+</tr>
+</tbody></table>
+<h3 id="3-5-其他器件"><a href="#3-5-其他器件" class="headerlink" title="3.5 其他器件"></a>3.5 其他器件</h3><h4 id="3-5-1-电压控制电压源"><a href="#3-5-1-电压控制电压源" class="headerlink" title="3.5.1 电压控制电压源"></a>3.5.1 电压控制电压源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Exxx<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-5-2-电流控制电流源"><a href="#3-5-2-电流控制电流源" class="headerlink" title="3.5.2 电流控制电流源"></a>3.5.2 电流控制电流源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Fxxx<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-5-3-电压控制电流源"><a href="#3-5-3-电压控制电流源" class="headerlink" title="3.5.3 电压控制电流源"></a>3.5.3 电压控制电流源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Gxxx<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-5-4-电流控制电压源"><a href="#3-5-4-电流控制电压源" class="headerlink" title="3.5.4 电流控制电压源"></a>3.5.4 电流控制电压源</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Hxxx<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-5-5-传输线"><a href="#3-5-5-传输线" class="headerlink" title="3.5.5 传输线"></a>3.5.5 传输线</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">Txxx in refin out refout Z0 = val TD = val &lt;L = val&gt; &lt;IC = v1,i1,v2,i2&gt;<br><br>Uxxx in1 &lt;in2 &lt;...in5&gt;&gt; refin out1 &lt;out2 &lt;...out5&gt;&gt; refout mname<br>+ L = val &lt;LUMPS = val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Txxx</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>in</td>
+<td>输入结点</td>
+</tr>
+<tr>
+<td>refin</td>
+<td>参考地（对于输入）</td>
+</tr>
+<tr>
+<td>out</td>
+<td>输出结点</td>
+</tr>
+<tr>
+<td>refout</td>
+<td>参考地（对于输出）</td>
+</tr>
+<tr>
+<td>Z0</td>
+<td>特征阻抗</td>
+</tr>
+<tr>
+<td>TD</td>
+<td>延迟（秒每米）</td>
+</tr>
+<tr>
+<td>L</td>
+<td>长度（米），默认为1</td>
+</tr>
+<tr>
+<td>IC &#x3D; v1,i1,v2,i2</td>
+<td>初始条件：输入电压（v1）、输入流（i1）、输出电压（v2）和输出电流（i2）</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Uxxx</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>inx</td>
+<td>第x条传输线的信号输入结点（需要有n1）。</td>
+</tr>
+<tr>
+<td>refin</td>
+<td>参考地（对于输入）</td>
+</tr>
+<tr>
+<td>outx</td>
+<td>第x条传输线的信号输出结点（每个输入端口必须有一个对应的输出端口）。</td>
+</tr>
+<tr>
+<td>refout</td>
+<td>参考地（对于输出）</td>
+</tr>
+<tr>
+<td>mname</td>
+<td>使用的模型名称</td>
+</tr>
+<tr>
+<td>L</td>
+<td>长度（米）</td>
+</tr>
+<tr>
+<td>LUMPS</td>
+<td>仿真中使用的集总部分的数量</td>
+</tr>
+</tbody></table>
+<h3 id="3-6-控制语句"><a href="#3-6-控制语句" class="headerlink" title="3.6 控制语句"></a>3.6 控制语句</h3><h4 id="3-6-1-ALTER"><a href="#3-6-1-ALTER" class="headerlink" title="3.6.1 .ALTER"></a>3.6.1 .ALTER</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.alter<br></code></pre></td></tr></table></figure>
+
+<p>用于使用不同的参数和数据反复仿真</p>
+<h4 id="3-6-2-DATA"><a href="#3-6-2-DATA" class="headerlink" title="3.6.2 .DATA"></a>3.6.2 .DATA</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.DATA datanm pnam1 &lt; pnam2 pnam3 … pnamxxx&gt; <br>+ pval1 &lt; pval2 pval3 … pvalxxx&gt; <br>+ pval1&#x27; &lt; pval2&#x27; pval3&#x27; … pvalxxx&#x27;&gt; <br>.ENDDATA<br><br><br>*例子<br><br>.param width=0 length=0 thresh=0 cap=0 <br>.tran 1n 100n sweep data=devinf <br>.data devinf width length thresh  cap <br>             50u      30u   1.2v  1.2pf <br>             25u      15u   1.0v  0.8pf <br>              5u      2u    0.7v  0.6pf <br>.enddata <br></code></pre></td></tr></table></figure>
+
+<p>可以修改不同的参数进行仿真</p>
+<h4 id="3-6-3-GLOBAL"><a href="#3-6-3-GLOBAL" class="headerlink" title="3.6.3 .GLOBAL"></a>3.6.3 .GLOBAL</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.global node1 node2 ...<br></code></pre></td></tr></table></figure>
+
+<p>定义全局结点</p>
+<h4 id="3-6-4-INCLUDE"><a href="#3-6-4-INCLUDE" class="headerlink" title="3.6.4 .INCLUDE"></a>3.6.4 .INCLUDE</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.inlcude &#x27;&lt;filepath&gt; filename&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>引用文件</p>
+<p><em>可简写为.inc</em></p>
+<h4 id="3-6-5-LIB"><a href="#3-6-5-LIB" class="headerlink" title="3.6.5 .LIB"></a>3.6.5 .LIB</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.LIB &#x27;&lt;filepath&gt;filename&#x27; entryname<br></code></pre></td></tr></table></figure>
+
+<p>使用工艺库</p>
+<p>entryname: 库文件中的名称，如工艺角‘TT’</p>
+<h4 id="3-6-6-MEASURE"><a href="#3-6-6-MEASURE" class="headerlink" title="3.6.6 .MEASURE"></a>3.6.6 .MEASURE</h4><h5 id="3-6-6-1-上升、下降与延迟"><a href="#3-6-6-1-上升、下降与延迟" class="headerlink" title="3.6.6.1 上升、下降与延迟"></a>3.6.6.1 上升、下降与延迟</h5><p>用于测量自变量 （时间、频率或任何参数或温度） 差分测量，例如上升时间、下降时间、转换速率以及任何需要确定自变量值的测量。该方法指定子语句 TRIG 和 TARG。这两个语句指定了测量开始和结束时电压或电流的幅度。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.MEASURE &lt;DC|AC|TRAN&gt; result TRIG ... TARG ...<br>+ &lt;GOAL = val&gt; &lt;MINVAL = val&gt; &lt;WEIGHT = val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>result</td>
+<td>与Hspice输出中的测量值关联的名称。测量的项目从TRIG开始到TARG结束的自变量：对于瞬态分析，它是时间；对于交流分析，它是频率；对于DC分析，它是DC扫描变量。如果在TRIG激活之前达到目标，则结果值为负。<br>注意：不可以用“DC”、“TRAN”和“AC”命名。</td>
+</tr>
+<tr>
+<td>TRIG…, TARG …</td>
+<td>标志开始的TRGI和最终目标TARG</td>
+</tr>
+<tr>
+<td>&lt;DC|AC|TRAN&gt;</td>
+<td>指定测量的分析类型。若省略，则为最后一个分析模式。</td>
+</tr>
+<tr>
+<td>GOAL</td>
+<td>指定优化中所需的测量值。</td>
+</tr>
+<tr>
+<td>MINVAL</td>
+<td>如果GOAL的绝对值小于MINVAL，则ERRfun表达式分母中的GOAL值将被MINVAL替换。默认值&#x3D;1.0e-12。</td>
+</tr>
+<tr>
+<td>WEIGHT</td>
+<td>计算出的误差乘以权重值，用于优化，默认值&#x3D;1.0。</td>
+</tr>
+</tbody></table>
+<p><strong>TRIG</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">TRIG trig_var VAL = trig_val &lt;TD = time_delay&gt; &lt;CROSS = c&gt;<br>+ &lt;RISE = r&gt; &lt;FALL = f&gt;<br><br>TRIG AT = va<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>TRIG</th>
+<th>触发</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trig_val</td>
+<td>trig_var的值，用于交叉、上升或下降的计数器递增1</td>
+</tr>
+<tr>
+<td>trig_var</td>
+<td>指定输出变量的名称，该名称决定了测量的逻辑起点。如果在TRIG被激活之前达到TRAG则.MEASURE报告负值。</td>
+</tr>
+</tbody></table>
+<p><strong>TARG</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">TARG targ_var VAL = targ_val &lt;TD = time_delay&gt;<br>+ &lt;CROSS = c | LAST&gt; &lt;RISE = r | LAST&gt; &lt;FALL = f | LAST&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>TARG</th>
+<th>目标信号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>targ_val</td>
+<td>trig_var的值，用于交叉、上升或下降的计数器递增1</td>
+</tr>
+<tr>
+<td>targ_var</td>
+<td>由trig_var确定的传播延迟的输出变量的名称</td>
+</tr>
+<tr>
+<td>time_delay</td>
+<td>启用测量之前必须经过的模拟时间量，交叉、上升或下降的次数仅在time_delay值之后计算。默认触发延迟为零。</td>
+</tr>
+<tr>
+<td>CROSS &#x3D; c<br>RISE &#x3D; r<br>FALL &#x3D; f</td>
+<td>这些数字表示交叉、下降或上升事件的发生会导致执行测量。ForRISE&#x3D;r，满足WHEN条件，当指定信号上升r次时进行测量。对于FALL&#x3D;f，当指定信号下降f个下降时间时进行测量。交叉要么是上升，要么是下降，因此对于CROSS&#x3D;c，当指定信号由于上升或下降而达到总共<em>c</em>个交叉时间时，就会进行测量。对于TARG，最后一个事件用last关键字指定</td>
+</tr>
+<tr>
+<td>LAST</td>
+<td>当最后一个CROSS、FALL或RISE事件发生时，进行测量。对于CROSS&#x3D;LAST，测量是在上升或下降信号的WHEN条件最后一次为真时进行的。对于FALL&#x3D;LAST，测量是在下降信号的WHEN条件为真的最后一次进行的。对于RISE&#x3D;LAST，测量是在上升信号的WHEN条件为真的最后一次进行的。LAST是一个保留字，不能被选为上述参数名称</td>
+</tr>
+<tr>
+<td>AT &#x3D; val</td>
+<td>TRIG规格的特殊情况。“val”是TRAN分析的时间、AC分析的频率或DC分析的参数，在该时间开始测量。</td>
+</tr>
+</tbody></table>
+<h5 id="3-6-6-2-FIND和WHEN"><a href="#3-6-6-2-FIND和WHEN" class="headerlink" title="3.6.6.2 FIND和WHEN"></a>3.6.6.2 FIND和WHEN</h5><p>使用FIND 和 WHEN 函数，可以在某些特定事件发生时，测量任何自变量（时间、频率、参数）、任何因变量（例如电压或电流）或任何因变量的导数。这些测量语句在单位增益频率或相位测量中很有用，也可用于测量两个信号相互交叉时或信号与恒定值交叉时的时间、频率或任何参数值。测量将在指定的时间延迟 TD 后开始。可以通过将 RISE、FALL 或 CROSS 设置为值（或参数）或将 LAST 设置为最后一个事件来查找特定事件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.MEASURE &lt;DC|TRAN| AC&gt; result WHEN out_var = val &lt;TD = val&gt;<br>+ &lt; RISE = r | LAST &gt; &lt; FALL = f | LAST &gt; &lt; CROSS = c | LAST &gt;<br>+ &lt;GOAL = val&gt; &lt;MINVAL = val&gt; &lt;WEIGHT = val&gt;<br><br>.MEASURE &lt;DC|TRAN|AC&gt; result WHEN out_var1 = out_var2 &lt; TD = val &gt;<br>+ &lt; RISE = r | LAST &gt; &lt; FALL = f | LAST &gt; &lt; CROSS = c| LAST &gt;<br>+ &lt;GOAL = val&gt; &lt;MINVAL = val&gt; &lt;WEIGHT = val&gt;<br><br>.MEASURE &lt;DC|TRAN|AC&gt; result FIND out_var1 WHEN out_var2 = val &lt; TD = val &gt;<br>+ &lt; RISE = r | LAST &gt; &lt; FALL = f | LAST &gt;<br>+ &lt; CROSS = c| LAST &gt; &lt;GOAL = val&gt; &lt;MINVAL = val&gt; &lt;WEIGHT = val&gt;<br><br>.MEASURE &lt;DC|TRAN|AC&gt; result FIND out_var1 WHEN out_var2 = out_var3<br>+ &lt;TD = val &gt; &lt; RISE = r | LAST &gt; &lt; FALL = f | LAST &gt;<br>+ &lt;CROSS = c | LAST&gt; &lt;GOAL = val&gt; &lt;MINVAL = val&gt; &lt;WEIGHT = val&gt;<br><br>.MEASURE &lt;DC|TRAN|AC&gt; result FIND out_var1 AT = val &lt;GOAL = val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CROSS &#x3D; c<strong>RISE &#x3D; r</strong>FALL &#x3D; f</td>
+<td>The numbers indicate which occurrence of a CROSS, FALL, or RISE event causes a measurement to be performed. For RISE &#x3D; r, the WHEN condition is met and measurement is performed when the designated signal has risen r rise times. For FALL &#x3D; f, measurement is performed when the designated signal has fallen f fall times. A crossing is either a rise or a fall, so for CROSS &#x3D; c, measurement is performed when the designated signal has achieved a total of <em>c</em> crossing times, as a result of either rising or falling.</td>
+</tr>
+<tr>
+<td>&lt;DC|AC|TRAN&gt;</td>
+<td>Specifies the analysis type of the measurement. If omitted, the last analysis type requested is assumed.</td>
+</tr>
+<tr>
+<td>FIND</td>
+<td>Selects the FIND function</td>
+</tr>
+<tr>
+<td>GOAL</td>
+<td>Specifies the desired .MEASURE value. It is used in optimization.</td>
+</tr>
+<tr>
+<td>LAST</td>
+<td>Measurement is performed when the last CROSS, FALL, or RISE event occurs. For CROSS &#x3D; LAST, measurement is performed the last time the WHEN condition is true for either a rising or falling signal. For FALL &#x3D; LAST, measurement is performed the last time the WHEN condition is true for a falling signal. For RISE &#x3D; LAST, measurement is performed the last time the WHEN condition is true for a rising signal. LAST is a reserved word and cannot be chosen as a parameter name in the above .MEASURE statements.</td>
+</tr>
+<tr>
+<td>MINVAL</td>
+<td>If the absolute value of GOAL is less than MINVAL, the GOAL value is replaced by MINVAL in the denominator of the ERRfun expression. Default &#x3D; 1.0e-12.</td>
+</tr>
+<tr>
+<td>out_var(1,2,3)</td>
+<td>Variables used to establish conditions at which measurement is to take place</td>
+</tr>
+<tr>
+<td>result</td>
+<td>Name associated with the measured value in the Star-Hspice output</td>
+</tr>
+<tr>
+<td>TD</td>
+<td>Identifies the time at which measurement is to start</td>
+</tr>
+<tr>
+<td>WEIGHT</td>
+<td>Calculated error is multiplied by the weight value. Default &#x3D; 1.0.</td>
+</tr>
+<tr>
+<td>WHEN</td>
+<td>Selects the WHEN function</td>
+</tr>
+</tbody></table>
+<h5 id="3-6-6-3-Average-RMS-MIN-MAX-INTEG-和-Peak-To-Peak"><a href="#3-6-6-3-Average-RMS-MIN-MAX-INTEG-和-Peak-To-Peak" class="headerlink" title="3.6.6.3 Average, RMS, MIN, MAX, INTEG, 和 Peak-To-Peak"></a>3.6.6.3 Average, RMS, MIN, MAX, INTEG, 和 Peak-To-Peak</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.MEASURE &lt;DC|AC|TRAN&gt; result func out_var &lt;FROM = val&gt; &lt;TO = val&gt;<br>+ &lt;GOAL = val&gt; &lt;MINVAL = val&gt; &lt;WEIGHT = val&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;DC|AC|TRAN&gt;</td>
+<td>Specifies the analysis type of the measurement. If omitted, the last analysis mode requested is assumed.</td>
+</tr>
+<tr>
+<td>FROM</td>
+<td>Specifies the initial value for the “func” calculation. For transient analysis, value is in units of time.</td>
+</tr>
+<tr>
+<td>TO</td>
+<td>Specifies the end of the “func” calculation.</td>
+</tr>
+<tr>
+<td>GOAL</td>
+<td>Specifies the desired .MEASURE value. It is used in optimization.</td>
+</tr>
+<tr>
+<td>MINVAL</td>
+<td>If the absolute value of GOAL is less than MINVAL, the GOAL value is replaced by MINVAL in the denominator of the ERRfun expression. Default &#x3D; 1.0e-12.</td>
+</tr>
+<tr>
+<td>func</td>
+<td>Indicates the type of the measure statement, one of the following:<br><br>* AVG (average):<br>Calculates the area under the out_var divided by the periods of interest<br>* MAX (maximum):<br>Reports the maximum value of the out_var over the specified interval<br>* MIN (minimum):<br>Reports the minimum value of the out_var over the specified interval<br>* PP (peak-to-peak):<br>Reports the maximum value minus the minimum value of the out_var over the specified interval<br>* RMS (root mean squared):<br>Calculates the square root of the area under the out_var 2 curve divided by the period of interest</td>
+</tr>
+<tr>
+<td>result</td>
+<td>Name that is associated with the measured value in the Star-Hspice output. The value is a function of the variable specified (out_var) and func.</td>
+</tr>
+<tr>
+<td>out_var</td>
+<td>Name of any output variable whose function (“func”) is to be measured in the simulation.</td>
+</tr>
+<tr>
+<td>WEIGHT</td>
+<td>The calculated error is multiplied by the weight value. Default &#x3D; 1.0.</td>
+</tr>
+</tbody></table>
+<h5 id="3-6-6-4-INTEGRAL-积分"><a href="#3-6-6-4-INTEGRAL-积分" class="headerlink" title="3.6.6.4 INTEGRAL 积分"></a>3.6.6.4 INTEGRAL 积分</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.MEASURE &lt;DC|AC|TRAN&gt; result func out_var &lt;FROM = val&gt; &lt;TO = val&gt;<br>+ &lt;GOAL = val&gt; &lt;MINVAL = val&gt; &lt;WEIGHT = val&gt;<br></code></pre></td></tr></table></figure>
+
+<p>与3.5.6.3语法相同，但是函数定义为INTEGRAL</p>
+<h5 id="3-6-6-5-DERIVATIVE-求导"><a href="#3-6-6-5-DERIVATIVE-求导" class="headerlink" title="3.6.6.5 DERIVATIVE 求导"></a>3.6.6.5 DERIVATIVE 求导</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.MEASURE &lt;DC|AC|TRAN&gt; result DERIVATIVE out_var AT = val &lt;GOAL = val&gt;<br>+ &lt;MINVAL = val&gt; &lt;WEIGHT = val&gt;<br><br>.MEASURE &lt;DC|AC|TRAN&gt; result DERIVATIVE out_var WHEN var2 = val<br>+ &lt;RISE = r | LAST&gt; &lt;FALL = f | LAST&gt; &lt;CROSS = c | LAST&gt;<br>+ &lt;TD = tdval&gt; &lt;GOAL = goalval&gt; &lt;MINVAL = minval&gt; &lt;WEIGHT = weightval&gt;<br><br>.MEASURE &lt;DC|AC|TRAN&gt; result DERIVATIVE out_var WHEN var2 = var3<br>+ &lt;RISE = r | LAST&gt; &lt;FALL = f | LAST&gt; &lt;CROSS = c | LAST&gt;<br>+ &lt;TD = tdval&gt; &lt;GOAL = goalval&gt; &lt;MINVAL = minval&gt; &lt;WEIGHT = weightval&gt;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT &#x3D; val</td>
+<td>Value of out_var at which the derivative is to be found</td>
+</tr>
+<tr>
+<td>CROSS &#x3D; c<strong>RISE &#x3D; r</strong>FALL &#x3D; f</td>
+<td>The numbers indicate which occurrence of a CROSS, FALL, or RISE event causes a measurement to be performed. For RISE &#x3D; r, the WHEN condition is met and measurement is performed when the designated signal has risen r rise times. For FALL &#x3D; f, measurement is performed when the designated signal has fallen f fall times. A crossing is either a rise or a fall, so for CROSS &#x3D; c, measurement is performed when the designated signal has achieved a total of <em>c</em> crossing times, as a result of either rising or falling.</td>
+</tr>
+<tr>
+<td>&lt;DC|AC|TRAN&gt;</td>
+<td>Specifies the analysis type measured. If omitted, the last analysis mode requested is assumed.</td>
+</tr>
+<tr>
+<td>DERIVATIVE</td>
+<td>Selects the derivative function. May be abbreviated to DERIV.</td>
+</tr>
+<tr>
+<td>GOAL</td>
+<td>Specifies the desired .MEASURE value. It is used in optimization.</td>
+</tr>
+<tr>
+<td>LAST</td>
+<td>Measurement is performed when the last CROSS, FALL, or RISE event occurs. For CROSS &#x3D; LAST, measurement is performed the last time the WHEN condition is true for either a rising or falling signal. For FALL &#x3D; LAST, measurement is performed that last time the WHEN condition is true for a falling signal. For RISE &#x3D; LAST, measurement is performed the last time the WHEN condition is true for a rising signal. LAST is a reserved word and cannot be chosen as a parameter name in the above .MEASURE statements.</td>
+</tr>
+<tr>
+<td>MINVAL</td>
+<td>If the absolute value of GOAL is less than MINVAL, the GOAL value is replaced by MINVAL in the denominator of the ERRfun expression. Default &#x3D; 1.0e-12.</td>
+</tr>
+<tr>
+<td>out_var</td>
+<td>Variable for which the derivative is to be found</td>
+</tr>
+<tr>
+<td>result</td>
+<td>Name associated with the measured value in the Star-Hspice output</td>
+</tr>
+<tr>
+<td>TD</td>
+<td>Identifies the time at which measurement is to start</td>
+</tr>
+<tr>
+<td>var(2,3)</td>
+<td>Variables used to establish conditions at which measurement is to take place</td>
+</tr>
+<tr>
+<td>WEIGHT</td>
+<td>The calculated error between result and GOAL is multiplied by the weight value. Default &#x3D; 1.0.</td>
+</tr>
+<tr>
+<td>WHEN</td>
+<td>Selects the WHEN function</td>
+</tr>
+</tbody></table>
+<h5 id="3-6-6-6-ERROR-相对误差"><a href="#3-6-6-6-ERROR-相对误差" class="headerlink" title="3.6.6.6 ERROR 相对误差"></a>3.6.6.6 ERROR 相对误差</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.MEASURE &lt;DC|AC|TRAN&gt; result ERRfun meas_var calc_var &lt;MINVAL = val&gt;<br>+ &lt; IGNORE | YMIN = val&gt; &lt;YMAX = val&gt; &lt;WEIGHT = val&gt; &lt;FROM = val&gt;<br>+ &lt;TO = val&gt;<br></code></pre></td></tr></table></figure>
+
+<p>相对误差函数报告两个输出变量的相对差值,这种格式通常用于测量数据的优化和曲线拟合。相对误差格式指定了要从.PARAM变量中测量和计算的变量。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;DC|AC|TRAN&gt;</td>
+<td>Specifies the analysis type of the measurement. If omitted, the last analysis mode requested is assumed.</td>
+</tr>
+<tr>
+<td>result</td>
+<td>Name associated with the measured result in the output</td>
+</tr>
+<tr>
+<td>ERRfun</td>
+<td>ERRfun indicates which error function to use: ERR, ERR1, ERR2, or ERR3.</td>
+</tr>
+<tr>
+<td>meas_var</td>
+<td>Name of any output variable or parameter in the data statement. M denotes the meas_var in the error equation.</td>
+</tr>
+<tr>
+<td>calc_var</td>
+<td>Name of the simulated output variable or parameter in the .MEASURE statement to be compared with meas_var. C denotes the calc_var in the error equation.</td>
+</tr>
+<tr>
+<td>IGNOR|YMIN</td>
+<td>If the absolute value of meas_var is less than IGNOR value, then this point is not considered in the ERRfun calculation. Default &#x3D; 1.0e-15.</td>
+</tr>
+<tr>
+<td>FROM</td>
+<td>Specifies the beginning of the ERRfun calculation. For transient analysis, the from value is in units of time. Defaults to the first value of the sweep variable.</td>
+</tr>
+<tr>
+<td>WEIGHT</td>
+<td>The calculated error is multiplied by the weight value. Default &#x3D; 1.0.</td>
+</tr>
+<tr>
+<td>YMAX</td>
+<td>If the absolute value of meas_var is greater than the YMAX value, then this point is not considered in the ERRfun calculation. Default &#x3D; 1.0e+15.</td>
+</tr>
+<tr>
+<td>TO</td>
+<td>Specifies the end of the ERRfun calculation. Defaults to the last value of the sweep variable.</td>
+</tr>
+<tr>
+<td>MINVAL</td>
+<td>If the absolute value of meas_var is less than MINVAL, the meas_var value is replaced by MINVAL in the denominator of the ERRfun expression. Default &#x3D; 1.0e-12.</td>
+</tr>
+</tbody></table>
+<h4 id="3-6-7-OPTIONS"><a href="#3-6-7-OPTIONS" class="headerlink" title="3.6.7 .OPTIONS"></a>3.6.7 .OPTIONS</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.OPTIONS opt1 &lt;opt2 opt3 ...&gt;<br></code></pre></td></tr></table></figure>
+
+<p>对SPICE的行为进行控制</p>
+<p>关键字摘要：</p>
+<table>
+<thead>
+<tr>
+<th>常规控制</th>
+<th></th>
+<th>模型分析</th>
+<th>静态工作点、直流扫描、零极点</th>
+<th></th>
+<th>瞬态与交流小信号分析</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>Input, Output</em></td>
+<td><em>Interfaces</em></td>
+<td><em>General</em></td>
+<td><em>Accuracy</em></td>
+<td><em>Convergence</em></td>
+<td><em>Accuracy</em></td>
+<td><em>Timestep</em></td>
+</tr>
+<tr>
+<td>ACCT</td>
+<td>ARTIST</td>
+<td>DCAP</td>
+<td>ABSH</td>
+<td>CONVERGE</td>
+<td>ABSH</td>
+<td>ABSVAR</td>
+</tr>
+<tr>
+<td>ACOUT</td>
+<td>CDS</td>
+<td>SCALE</td>
+<td>ABSI</td>
+<td>CSHDC</td>
+<td>ABSV, VNTOL</td>
+<td>DELMAX</td>
+</tr>
+<tr>
+<td>ALT999ALT9999</td>
+<td>CSDF</td>
+<td>TNOM</td>
+<td>ABSMOS</td>
+<td>DCFOR</td>
+<td>ACCURATE</td>
+<td>DVDT</td>
+</tr>
+<tr>
+<td>MEASOUT</td>
+<td></td>
+<td>ABSTOL</td>
+<td>DCHOLD</td>
+<td>ACOUT</td>
+<td>FS</td>
+<td></td>
+</tr>
+<tr>
+<td>BRIEF</td>
+<td>MENTOR</td>
+<td><em>MOSFETs</em></td>
+<td>ABSVDC</td>
+<td>DCON</td>
+<td>CHGTOL</td>
+<td>FT</td>
+</tr>
+<tr>
+<td>CO</td>
+<td>POST</td>
+<td>CVTOL</td>
+<td>DI</td>
+<td>DCSTEP</td>
+<td>CSHUNT,GSHUNT</td>
+<td>IMIN, ITL3</td>
+</tr>
+<tr>
+<td>INGOLD</td>
+<td>PROBE</td>
+<td>DEFAD</td>
+<td>KCLTEST</td>
+<td>DCTRAN</td>
+<td>IMAX, ITL4</td>
+<td></td>
+</tr>
+<tr>
+<td>LENNAM</td>
+<td>PSF</td>
+<td>DEFAS</td>
+<td>MAXAMP</td>
+<td>DV</td>
+<td>DI</td>
+<td>ITL5</td>
+</tr>
+<tr>
+<td>LIST</td>
+<td>SDA</td>
+<td>DEFL</td>
+<td>RELH</td>
+<td>GMAX</td>
+<td>GMIN</td>
+<td>RELVAR</td>
+</tr>
+<tr>
+<td>MEASDGT</td>
+<td>ZUKEN</td>
+<td>DEFNRD</td>
+<td>RELI</td>
+<td>GMINDC</td>
+<td>GSHUNT,CSHUNT</td>
+<td>RMAX</td>
+</tr>
+<tr>
+<td>NODE</td>
+<td></td>
+<td>DEFNRS</td>
+<td>RELMOS</td>
+<td>GRAMP</td>
+<td>RMIN</td>
+<td></td>
+</tr>
+<tr>
+<td>NOELCK</td>
+<td><em>Analysis</em></td>
+<td>DEFPD</td>
+<td>RELV</td>
+<td><em>GSHUNT</em></td>
+<td>MAXAMP</td>
+<td>SLOPETOL</td>
+</tr>
+<tr>
+<td>NOMOD</td>
+<td>ASPEC</td>
+<td>DEFPS</td>
+<td>RELVDC</td>
+<td>ICSWEEP</td>
+<td>RELH</td>
+<td>TIMERES</td>
+</tr>
+<tr>
+<td>NOPAGE</td>
+<td>LIMPTS</td>
+<td>DEFW</td>
+<td></td>
+<td>NEWTOL</td>
+<td>RELI</td>
+<td></td>
+</tr>
+<tr>
+<td>NOTOP</td>
+<td>PARHIER</td>
+<td>SCALM</td>
+<td><em>Matrix</em></td>
+<td>OFF</td>
+<td>RELQ</td>
+<td><em>Algorithm</em></td>
+</tr>
+<tr>
+<td>NUMDGT</td>
+<td>SPICE</td>
+<td>WL</td>
+<td>ITL1</td>
+<td>RESMIN</td>
+<td>RELTOL</td>
+<td>DVTR</td>
+</tr>
+<tr>
+<td>NXX</td>
+<td>SEED</td>
+<td></td>
+<td>ITL2</td>
+<td></td>
+<td>RISETIME</td>
+<td>IMAX</td>
+</tr>
+<tr>
+<td>OPTLST</td>
+<td></td>
+<td><em>Inductors</em></td>
+<td>NOPIV</td>
+<td><em>Pole&#x2F;Zero</em></td>
+<td>TRTOL</td>
+<td>IMIN</td>
+</tr>
+<tr>
+<td>OPTS</td>
+<td><em>Error</em></td>
+<td>GENK</td>
+<td>PIVOT,SPARSE</td>
+<td>CSCAL</td>
+<td>VNTOL, ABSV</td>
+<td>LVLTIM</td>
+</tr>
+<tr>
+<td>PATHNUM</td>
+<td>BADCHR</td>
+<td>KLIM</td>
+<td>FMAX</td>
+<td><em>Speed</em></td>
+<td>MAXORD</td>
+<td></td>
+</tr>
+<tr>
+<td>PLIM</td>
+<td>DIAGNOSTIC</td>
+<td></td>
+<td>PIVREF</td>
+<td>FSCAL</td>
+<td>AUTOSTOP</td>
+<td>METHOD</td>
+</tr>
+<tr>
+<td>POST_VERSION</td>
+<td>NOWARN</td>
+<td><em>BJTs</em></td>
+<td>PIVREL</td>
+<td>GSCAL</td>
+<td>BKPSIZ</td>
+<td>MU, XMU</td>
+</tr>
+<tr>
+<td>SEARCH</td>
+<td>WARNLIMIT</td>
+<td>EXPLI</td>
+<td>PIVTOL</td>
+<td>LSCAL</td>
+<td>BYPASS</td>
+<td></td>
+</tr>
+<tr>
+<td>VERIFY</td>
+<td></td>
+<td></td>
+<td>SPARSE,PIVOT</td>
+<td>PZABS</td>
+<td>BYTOL</td>
+<td><em>Input, Output</em></td>
+</tr>
+<tr>
+<td><em>CPU</em></td>
+<td><em>Version</em></td>
+<td><em>Diodes</em></td>
+<td>PZTOL</td>
+<td>FAST</td>
+<td>INTERP</td>
+<td></td>
+</tr>
+<tr>
+<td>CPTIME</td>
+<td>H9007</td>
+<td>EXPLI</td>
+<td></td>
+<td>RITOL</td>
+<td>ITLPZ</td>
+<td>ITRPRT</td>
+</tr>
+<tr>
+<td>EPSMIN</td>
+<td></td>
+<td></td>
+<td><em>Input, Output</em></td>
+<td>XnR, XnI</td>
+<td>MBYPASS</td>
+<td>UNWRAP</td>
+</tr>
+<tr>
+<td>EXPMAX</td>
+<td></td>
+<td></td>
+<td>CAPTAB</td>
+<td>NEWTOL</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LIMTIM</td>
+<td></td>
+<td></td>
+<td>DCCAP</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>VFLOOR</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="3-6-8-PRINT"><a href="#3-6-8-PRINT" class="headerlink" title="3.6.8 .PRINT"></a>3.6.8 .PRINT</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.PRINT antype ov1 &lt;ov2 ...OV32&gt;<br></code></pre></td></tr></table></figure>
+
+<p>指定要在输出文件中打印的变量值</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ANTYPE</td>
+<td>指定输出的分析类型，Antype 是以下类型之一：DC、AC、TRAN、NOISE 或 DISTO</td>
+</tr>
+<tr>
+<td>OV1 …</td>
+<td>指定要打印的输出变量，来自 DC、AC、TRAN、NOISE 或 DISTO 分析的电压、电流或器件模板变量</td>
+</tr>
+</tbody></table>
+<h4 id="3-6-9-TEMP"><a href="#3-6-9-TEMP" class="headerlink" title="3.6.9 .TEMP"></a>3.6.9 .TEMP</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.temp t1 &lt;t2 &lt; t3 …&gt; &gt; <br></code></pre></td></tr></table></figure>
+
+<p>设定电流仿真时的温度</p>
+<h3 id="3-7-仿真语句"><a href="#3-7-仿真语句" class="headerlink" title="3.7 仿真语句"></a>3.7 仿真语句</h3><h4 id="3-7-1-IC-初始化"><a href="#3-7-1-IC-初始化" class="headerlink" title="3.7.1 .IC 初始化"></a>3.7.1 .IC 初始化</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.IC V(node1)=val1 V(node2)=val2 …… <br></code></pre></td></tr></table></figure>
+
+<p><em>用于初始化瞬态仿真</em></p>
+<h4 id="3-7-2-OP-工作点"><a href="#3-7-2-OP-工作点" class="headerlink" title="3.7.2 .OP 工作点"></a>3.7.2 .OP 工作点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.OP <br></code></pre></td></tr></table></figure>
+
+<p><em>DC仿真时计算静态工作点</em></p>
+<h4 id="3-7-3-DC-直流仿真"><a href="#3-7-3-DC-直流仿真" class="headerlink" title="3.7.3 .DC 直流仿真"></a>3.7.3 .DC 直流仿真</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.DC var1 START=start1 STOP=stop1 STEP=incr1 <br><br>.DC var1 start1 stop1 incr1 &lt; SWEEP var2 type np start2 stop2&gt;<br><br>.DC var1 start1 stop1 incr1 &lt; SWEEP DATA=datanam&gt; <br><br>.DC var1 start1 stop1 incr1 &lt;var2 start2 stop2 incr2&gt;<br><br>*蒙特卡洛仿真<br>.DC var1 type np start1 stop1 &lt;SWEEP MONTE=val&gt; <br><br>.DC MONTE=val <br></code></pre></td></tr></table></figure>
+
+<h5 id="3-7-3-1-直流仿真声明"><a href="#3-7-3-1-直流仿真声明" class="headerlink" title="3.7.3.1 直流仿真声明"></a>3.7.3.1 直流仿真声明</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.pz *零极点分析 <br>.sens *直流小信号敏感性分析<br>.tf *直流小信号传输函数分析<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-7-4-AC-交流仿真"><a href="#3-7-4-AC-交流仿真" class="headerlink" title="3.7.4 .AC 交流仿真"></a>3.7.4 .AC 交流仿真</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.AC type np fstart fstop <br><br>.AC type np fstart fstop &lt;SWEEP var start stop incr&gt; <br><br>.AC type np fstart fstop &lt;SWEEP var type np start stop&gt; <br><br>.AC type np fstart fstop &lt;SWEEP DATA=datanam&gt; <br></code></pre></td></tr></table></figure>
+
+<p>fstart：开始频率<br>fstop：结束频率</p>
+<h5 id="3-7-4-1交流仿真声明"><a href="#3-7-4-1交流仿真声明" class="headerlink" title="3.7.4.1交流仿真声明"></a>3.7.4.1交流仿真声明</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.disto *失真分析<br>.net *网络分析<br>.noise *噪声分析<br>.sample *采样噪声分析 <br></code></pre></td></tr></table></figure>
+
+<h4 id="3-7-5-瞬态仿真"><a href="#3-7-5-瞬态仿真" class="headerlink" title="3.7.5 瞬态仿真"></a>3.7.5 瞬态仿真</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.TRAN  tincr1 tstop1 &lt;tincr2 tstop2 …tincrN tstopN&gt; &lt;START=val&gt; &lt;UIC&gt; <br>+  &lt;SWEEP var pstart pstop pincr&gt; <br><br>.TRAN  tincr1 tstop1 &lt;tincr2 tstop2 …tincrN tstopN&gt; &lt;START=val&gt; &lt;UIC&gt; <br>+  &lt;SWEEP DATA=datanm&gt; <br></code></pre></td></tr></table></figure>
+
+<h5 id="3-7-5-1-傅里叶仿真"><a href="#3-7-5-1-傅里叶仿真" class="headerlink" title="3.7.5.1 傅里叶仿真"></a>3.7.5.1 傅里叶仿真</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.fft  &lt;output_var&gt; &lt;START=value&gt; &lt;STOP=value&gt; &lt;NP=value&gt; <br>+ &lt;FORMAT=keyword&gt; &lt;WINDOW=keyword&gt; &lt;ALFA=value&gt; &lt;FREQ=value&gt; <br>+ &lt;FMIN=value&gt; &lt;FMAX=value&gt; <br></code></pre></td></tr></table></figure>
+
+<h3 id="3-8-输入语句"><a href="#3-8-输入语句" class="headerlink" title="3.8 输入语句"></a>3.8 输入语句</h3><h4 id="3-8-1-PARAM-参数定义"><a href="#3-8-1-PARAM-参数定义" class="headerlink" title="3.8.1 .PARAM 参数定义"></a>3.8.1 .PARAM 参数定义</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">*定义<br>.PARAM &lt;ParamName&gt; = &lt;RealNumber&gt;<br>.PARAM &lt;ParamName&gt; = &#x27;&lt;Expression&gt;&#x27; <br>.PARAM &lt;ParamName1&gt; = &lt;ParamName2&gt; <br><br>*定义一个数<br>.PARAM TermValue = 1g<br>*定义一个表达式<br>.PARAM Pi = &#x27;355/113&#x27;<br>.PARAM Pi2 = &#x27;2*Pi&#x27;<br>**<br>***定义<br>.PARAM npRatio = 2.1<br>.PARAM nWidth = 3u<br>.PARAM pWidth = &#x27;nWidth * npRatio&#x27;<br>***使用<br>Mp1 ... &lt;pModelName&gt; W = pWidth<br>Mn1 ... &lt;nModelName&gt; W = nWidth<br>**<br></code></pre></td></tr></table></figure>
+
+<p>一些支持的函数：</p>
+<table>
+<thead>
+<tr>
+<th>HSPICE Form</th>
+<th>Function</th>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sin(x)</td>
+<td>sine</td>
+<td>trig</td>
+<td>返回x(弧度)的正弦值</td>
+</tr>
+<tr>
+<td>cos(x)</td>
+<td>cosine</td>
+<td>trig</td>
+<td>返回x(弧度)的余弦值</td>
+</tr>
+<tr>
+<td>tan(x)</td>
+<td>tangent</td>
+<td>trig</td>
+<td>返回x(弧度)的正切值</td>
+</tr>
+<tr>
+<td>asin(x)</td>
+<td>arc sine</td>
+<td>trig</td>
+<td>返回x(弧度)的反正弦值</td>
+</tr>
+<tr>
+<td>acos(x)</td>
+<td>arc cosine</td>
+<td>trig</td>
+<td>返回x(弧度)的反余弦值</td>
+</tr>
+<tr>
+<td>atan(x)</td>
+<td>arc tangent</td>
+<td>trig</td>
+<td>返回x(弧度)的反正切值</td>
+</tr>
+<tr>
+<td>sinh(x)</td>
+<td>hyperbolic sine</td>
+<td>trig</td>
+<td>返回x(弧度)的双曲正弦值</td>
+</tr>
+<tr>
+<td>cosh(x)</td>
+<td>hyperbolic cosine</td>
+<td>trig</td>
+<td>返回x(弧度)的双曲余弦值</td>
+</tr>
+<tr>
+<td>tanh(x)</td>
+<td>hyperbolic tangent</td>
+<td>trig</td>
+<td>返回x(弧度)的双曲正切值</td>
+</tr>
+<tr>
+<td>abs(x)</td>
+<td>absolute value</td>
+<td>math</td>
+<td>返回x的绝对值|x|</td>
+</tr>
+<tr>
+<td>sqrt(x)</td>
+<td>square root</td>
+<td>math</td>
+<td>返回x的平方根</td>
+</tr>
+<tr>
+<td>pow(x,y)</td>
+<td>absolute power</td>
+<td>math</td>
+<td>返回值是$x^{integer part of y}$</td>
+</tr>
+<tr>
+<td>pwr(x,y)</td>
+<td>signed power</td>
+<td>math</td>
+<td>返回值是$(sign of x)|x|^y$</td>
+</tr>
+<tr>
+<td>log(x)</td>
+<td>natural logarithm</td>
+<td>math</td>
+<td>返回值是(sign of x)lg(|x|)</td>
+</tr>
+<tr>
+<td>log10(x)</td>
+<td>base 10 logarithm</td>
+<td>math</td>
+<td>返回值是(sign of x)lg(|x|)</td>
+</tr>
+<tr>
+<td>exp(x)</td>
+<td>exponential</td>
+<td>math</td>
+<td>返回值x的e指数值</td>
+</tr>
+<tr>
+<td>db(x)</td>
+<td>decibels</td>
+<td>math</td>
+<td>返回值是(sign of x)20lg(|x|)</td>
+</tr>
+<tr>
+<td>int(x)</td>
+<td>integer</td>
+<td>math</td>
+<td>返回小于等于x的最大整数</td>
+</tr>
+<tr>
+<td>sgn(x)</td>
+<td>return sign</td>
+<td>math</td>
+<td>x&gt;0返回1,x&lt;0返回-1,x&#x3D;0返回0</td>
+</tr>
+<tr>
+<td>sign(x,y)</td>
+<td>transfer sign</td>
+<td>math</td>
+<td>返回值是(sign of y)|x|</td>
+</tr>
+<tr>
+<td>min(x,y)</td>
+<td>smaller of two args</td>
+<td>control</td>
+<td>返回x,y中较小值</td>
+</tr>
+<tr>
+<td>max(x,y)</td>
+<td>larger of two args</td>
+<td>control</td>
+<td>返回x,y中较大值</td>
+</tr>
+<tr>
+<td>lv(<Element>)<br>or<br>lx(<Element>)</Element></Element></td>
+<td>element templates</td>
+<td>various</td>
+<td>返回仿真中的不同器件值</td>
+</tr>
+<tr>
+<td>v(<Node>), i(<Element>)…</Element></Node></td>
+<td>circuit output variables</td>
+<td>various</td>
+<td>返回仿真中的不同电路值</td>
+</tr>
+</tbody></table>
+<h4 id="3-8-2-SUBCKT-子电路"><a href="#3-8-2-SUBCKT-子电路" class="headerlink" title="3.8.2 .SUBCKT 子电路"></a>3.8.2 .SUBCKT 子电路</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs HSPICE">.subckt subnam n1 &lt;n2 n3 …&gt; &lt;parnam=val …&gt; <br><br>.ends <br><br>.macro subnam n1 &lt;n2 n3 …&gt; &lt;parnam=val …&gt; <br><br>.eom<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-9-其他语句"><a href="#3-9-其他语句" class="headerlink" title="3.9 其他语句"></a>3.9 其他语句</h3><p><em>持续更新中</em></p>
+<h2 id="4-参考"><a href="#4-参考" class="headerlink" title="4 参考"></a>4 参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://km2000.us/franklinduan/articles/hspice/">Index of &#x2F;franklinduan&#x2F;articles&#x2F;hspice</a> </li>
+<li><a target="_blank" rel="noopener" href="https://picture.iczhiku.com/resource/eetop/WyKdehoYktgYdvNB.pdf">HSPICE® User Guide: Advanced Analog Simulation and Analysis</a></li>
+<li><a target="_blank" rel="noopener" href="https://ece.northeastern.edu/courses/eece4525/2018su/Hspice/Hspice_User_Guide.pdf">HSPICE User Guide</a></li>
+<li><a target="_blank" rel="noopener" href="https://bbs.eetop.cn/thread-209953-1-1.html">Hspice电路仿真.ppt</a></li>
+<li><a target="_blank" rel="noopener" href="https://ks3-cn-beijing.ksyun.com/attachment/2608cf22ba5521ba5492bb8210d48c51">Hspice语法手册 天津大学电力学院 陈力颖</a></li>
+<li><a target="_blank" rel="noopener" href="http://rfic.fudan.edu.cn/Courses/paicd2014/Homework/Supplement/Supplement/HSPICE%e7%ae%80%e6%98%8e%e6%95%99%e7%a8%8b(%e5%a4%8d%e6%97%a6%e5%a4%a7%e5%ad%a6).pdf">HSPICE简明教程(复旦大学).pdf</a></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HSPICE/" class="category-chain-item">HSPICE</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HSPICE/" class="print-no-link">#HSPICE</a>
+      
+        <a href="/tags/%E8%AF%AD%E6%B3%95/" class="print-no-link">#语法</a>
+      
+        <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="print-no-link">#基础知识</a>
+      
+    </div>
+  
+</div>
+
+
+              <a id="copyright"></a>
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Spice简要语法整理</div>
+      <div>https://yaohaolin.cn/2024/12/01/Spice简要语法整理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>YaoHaolin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年12月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-cc-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/25/%E5%A6%82%E4%BD%95%E5%9C%A8HEXO%E4%B8%AD%E6%8F%92%E5%85%A5PDF/" title="如何在HEXO中插入PDF">
+                        <span class="hidden-mobile">如何在HEXO中插入PDF</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Powered by  <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span> Fluid</span></a> , <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span> Hexo</span></a>     , and  <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span> Github</span></a> <br>2024, Yaohaolin.cn 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
