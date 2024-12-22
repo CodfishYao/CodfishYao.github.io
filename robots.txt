@@ -10,6 +10,6 @@ Allow: /css/
 Disallow: /fonts/
 Disallow: /fancybox/
 Disallow: /2024/11/25/pdfDemo
-Disallow: /sadfasdf4sd4f8asdf14a6sd74f89as4d1f
+Disallow: /sadfasdf4sd4f8asdf14a6sd74f89as4d1f.txt
 Sitemap: https://yaohaolin.cn/sitemap.xml
 Sitemap: https://yaohaolin.cn/baidusitemap.xml
