@@ -9,5 +9,6 @@ Allow: /js/
 Allow: /css/
 Disallow: /fonts/
 Disallow: /fancybox/
+Disallow: /2024/11/25/pdfDemo
 Sitemap: https://yaohaolin.cn/sitemap.xml
 Sitemap: https://yaohaolin.cn/baidusitemap.xml

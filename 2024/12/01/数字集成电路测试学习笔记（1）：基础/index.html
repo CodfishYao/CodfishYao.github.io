@@ -19,26 +19,24 @@
   <meta name="author" content="YaoHaolin">
   <meta name="keywords" content="Blog, IC">
   
-    <meta name="description" content="本文分享了利用HEXO和Github Pages建立个人博客后，每次提交至库后Github Pages自定义域名清空的解决方案">
+    <meta name="description" content="数字集成电路测试技术基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github Pages自定义域名消失的解决方案">
-<meta property="og:url" content="https://yaohaolin.cn/2024/11/24/Github%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B6%88%E5%A4%B1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:title" content="数字集成电路测试学习笔记（1）：基础">
+<meta property="og:url" content="https://yaohaolin.cn/2024/12/01/%E6%95%B0%E5%AD%97%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%B5%8B%E8%AF%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9A%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Yaohaolin">
-<meta property="og:description" content="本文分享了利用HEXO和Github Pages建立个人博客后，每次提交至库后Github Pages自定义域名清空的解决方案">
+<meta property="og:description" content="数字集成电路测试技术基础">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://yaohaolin.cn/2024/11/24/Github%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B6%88%E5%A4%B1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/github.png">
-<meta property="article:published_time" content="2024-11-23T16:10:02.000Z">
-<meta property="article:modified_time" content="2024-11-23T16:31:30.332Z">
+<meta property="article:published_time" content="2024-12-01T15:01:45.000Z">
+<meta property="article:modified_time" content="2024-12-22T13:38:23.950Z">
 <meta property="article:author" content="YaoHaolin">
-<meta property="article:tag" content="HEXO">
-<meta property="article:tag" content="Gihub">
-<meta property="article:tag" content="网络">
+<meta property="article:tag" content="基础知识">
+<meta property="article:tag" content="数字电路">
+<meta property="article:tag" content="电路测试">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://yaohaolin.cn/2024/11/24/Github%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%B6%88%E5%A4%B1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/github.png">
   
   
   
-  <title>Github Pages自定义域名消失的解决方案 - Yaohaolin</title>
+  <title>数字集成电路测试学习笔记（1）：基础 - Yaohaolin</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Github Pages自定义域名消失的解决方案"></span>
+            <span id="subtitle" data-typed-text="数字集成电路测试学习笔记（1）：基础"></span>
           
         </div>
 
@@ -240,8 +238,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-24 00:10" pubdate>
-          2024年11月24日 凌晨
+        <time datetime="2024-12-01 23:01" pubdate>
+          2024年12月1日 晚上
         </time>
       </span>
     
@@ -252,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          112 字
+          445 字
         
       </span>
     
@@ -263,7 +261,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -309,21 +307,28 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Github Pages自定义域名消失的解决方案</h1>
+            <h1 id="seo-header">数字集成电路测试学习笔记（1）：基础</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="问题情况">问题情况</h2>
-<p>更新博客后，重新利用hexo生成静态文件推送至github后，github pages中的自定义域名消失。</p>
-<h2 id="解决方案">解决方案</h2>
-<p>在HEXO所在的路径<code>source\</code>中新建名为<strong>CNAME</strong>的文件，在文件中填写拥有的自定义域名（如<em> <a href="yaohaolin.cn">yaohaolin.cn</a> </em>）。</p>
-<div class="note note-warning">
-            <p><strong>注意：</strong></p><ol><li>CNAME文件名称必须全部大写；</li><li>CNAME文件中必须只能包含如<em> <a href="yaohaolin.cn">yaohaolin.cn</a> </em>的域名。</li></ol>
-          </div>
-<h2 id="参考文献">参考文献</h2>
-<p>本文参考自<a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages">官方文档</a>。</p>
-<p><a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages#cname-errors"><img src="github.png" srcset="/img/loading1.gif" lazyload alt="官方原文"></a></p>
+                <h2 id="1-故障模型">1.故障模型</h2>
+<p>由于芯片的制造过程并不是完全理想的，因此会在芯片中发生多种不同的变化，这些变化就会产生缺陷。常见的缺陷来源包括：短路、开路、设计方法、参数波动等。<br>
+我们将这些缺陷进行抽象，便可以得到芯片的故障模型。</p>
+<p>数字电路常见的故障模型包括：固定型故障、桥接故障、时延故障、管级故障、单元感知故障等。</p>
+<h3 id="1-1固定型故障">1.1固定型故障</h3>
+<p>固定型故障（Stuck-at Fault, SAF）假设电路中的每个连线会有两种类型故障：固定为1的故障和固定为0的故障。这类故障通常由物理缺陷引起。</p>
+<p><strong>等价故障（equivalent faults）</strong>：假定一个测试t能检测故障A，则t也一定能检测故障B，反之亦然，那么A和B的故障行为时等价的，二者就是一对等价故障。（<em>可以简单理解为A和B两个集合相等</em>）<br>
+通过分析等价故障，我们可以对故障进行精简。</p>
+<p><strong>故障支配（fault dominance）</strong>：如果某个故障A的所有测试都能检测到另一个故障B，则B可以支配A，亦即A是被B支配。（<em>可以简单理解为子集的关系，B包含A</em>）<br>
+通过故障支配可以提高效率，但是可能导致失去某个故障。</p>
+<h3 id="1-2桥接故障">1.2桥接故障</h3>
+<p>**桥接故障（Bridge Faulty，BF）**来源于金属线之间的短路。</p>
+<h2 id="参考">参考</h2>
+<ol>
+<li>数字集成电路测试：理论、方法与实践. 李华伟，郑武东等.</li>
+</ol>
+<p><em>书中有更详细的解释以及丰富的EDA资源，推荐对该领域有兴趣的同学或者工程师专家买一本看看</em></p>
 
                 
               </div>
@@ -342,8 +347,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" class="category-chain-item">经验分享</a>
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%AD%97%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%B5%8B%E8%AF%95/" class="category-chain-item">数字集成电路测试</a>
+  
+  
+
   
 
       </span>
@@ -357,11 +369,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/HEXO/" class="print-no-link">#HEXO</a>
+        <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="print-no-link">#基础知识</a>
       
-        <a href="/tags/Gihub/" class="print-no-link">#Gihub</a>
+        <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/" class="print-no-link">#数字电路</a>
       
-        <a href="/tags/%E7%BD%91%E7%BB%9C/" class="print-no-link">#网络</a>
+        <a href="/tags/%E7%94%B5%E8%B7%AF%E6%B5%8B%E8%AF%95/" class="print-no-link">#电路测试</a>
       
     </div>
   
@@ -374,8 +386,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Github Pages自定义域名消失的解决方案</div>
-      <div>https://yaohaolin.cn/2024/11/24/Github自定义域名消失的解决方案/</div>
+      <div>数字集成电路测试学习笔记（1）：基础</div>
+      <div>https://yaohaolin.cn/2024/12/01/数字集成电路测试学习笔记（1）：基础/</div>
     </div>
     <div class="license-meta">
       
@@ -387,7 +399,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月24日</div>
+          <div>2024年12月1日</div>
         </div>
       
       
@@ -420,29 +432,6 @@
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2024/11/25/UCAS%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A12024%E6%9C%9F%E6%9C%AB%E8%AF%95%E9%A2%98%E5%9B%9E%E5%BF%86%E7%89%88%E5%88%86%E4%BA%AB/" title="UCAS超大规模集成电路与系统设计2024期末试题回忆版分享">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">UCAS超大规模集成电路与系统设计2024期末试题回忆版分享</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2024/11/23/HEXO%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="HEXO无法显示图片的解决方案">
-                        <span class="hidden-mobile">HEXO无法显示图片的解决方案</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
               
             </div>
 
